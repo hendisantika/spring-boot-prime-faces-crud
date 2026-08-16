@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="primefaces">
+
+<h:head>
+    <title>Customer Management</title>
+</h:head>
+
+<h:body>
+    <h:form id="customerForm">
+        <p:growl id="growl" showDetail="true"/>
+
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:commandButton value="New Customer" icon="pi pi-plus"
+                                 actionListener="#{customerBean.openNew()}"
+                                 update=":customerForm:customerDialog"
+                                 oncomplete="PF('customerDialog').show()"/>
+            </p:toolbarGroup>
+        </p:toolbar>
+
+        <p:dataTable id="customersTable" var="customer" value="#{customerBean.customers}"
+                     emptyMessage="No customers found">
+            <p:column headerText="Id">
+                <h:outputText value="#{customer.id}"/>
+            </p:column>
+            <p:column headerText="Name">
+                <h:outputText value="#{customer.name}"/>
+            </p:column>
+            <p:column headerText="Email">
+                <h:outputText value="#{customer.email}"/>
+            </p:column>
+            <p:column headerText="Phone">
+                <h:outputText value="#{customer.phone}"/>
+            </p:column>
+            <p:column headerText="Address">
+                <h:outputText value="#{customer.address}"/>
+            </p:column>
+            <p:column headerText="Actions" style="width:120px">
+                <p:commandButton icon="pi pi-pencil" actionListener="#{customerBean.editCustomer(customer)}"
+                                  update=":customerForm:customerDialog"
+                                  oncomplete="PF('customerDialog').show()"
+                                  style="margin-right:.5rem"/>
+                <p:commandButton icon="pi pi-trash" actionListener="#{customerBean.deleteCustomer(customer)}"
+                                  update=":customerForm:customersTable"/>
+            </p:column>
+        </p:dataTable>
+
+        <p:dialog header="Customer" widgetVar="customerDialog" id="customerDialog" modal="true"
+                  showEffect="fade" hideEffect="fade" responsive="true">
+            <h:panelGrid columns="2" rendered="#{customerBean.selectedCustomer != null}">
+                <h:outputLabel for="name" value="Name"/>
+                <p:inputText id="name" value="#{customerBean.selectedCustomer.name}" required="true"/>
+
+                <h:outputLabel for="email" value="Email"/>
+                <p:inputText id="email" value="#{customerBean.selectedCustomer.email}" required="true"/>
+
+                <h:outputLabel for="phone" value="Phone"/>
+                <p:inputText id="phone" value="#{customerBean.selectedCustomer.phone}"/>
+
+                <h:outputLabel for="address" value="Address"/>
+                <p:inputText id="address" value="#{customerBean.selectedCustomer.address}"/>
+            </h:panelGrid>
+
+            <f:facet name="footer">
+                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{customerBean.saveCustomer()}"
+                                  update=":customerForm" oncomplete="PF('customerDialog').hide()"/>
+                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('customerDialog').hide()"
+                                  type="button" styleClass="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+    </h:form>
+</h:body>
+</html>
