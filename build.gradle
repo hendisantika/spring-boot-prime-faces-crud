@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform('org.joinfaces:joinfaces-platform:6.0.0-rc2')
+    implementation platform('org.joinfaces:joinfaces-platform:6.1.0')
     implementation 'org.joinfaces:primefaces-spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
