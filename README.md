@@ -45,8 +45,8 @@ Use the following connection settings:
 | Field    | Value                                      |
 |----------|--------------------------------------------|
 | JDBC URL | `jdbc:h2:mem:customerdb;DB_CLOSE_DELAY=-1` |
-| Username | `sa`                                       |
-| Password | *(empty)*                                  |
+| Username | `naruto`                                   |
+| Password | `53Cret`                                   |
 
 ## Running Tests
 
