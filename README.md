@@ -3,6 +3,8 @@
 A simple Customer CRUD application built with Spring Boot, JSF, and PrimeFaces, backed by an
 in-memory H2 database.
 
+![Customer list screenshot](docs/images/customer-list.jpg)
+
 ## Tech Stack
 
 - Java 25
