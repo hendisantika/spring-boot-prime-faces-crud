@@ -39,4 +39,6 @@ public class Customer {
     private String phone;
 
     private String address;
+
+    private String series;
 }
