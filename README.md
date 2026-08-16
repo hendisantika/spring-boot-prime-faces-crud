@@ -5,6 +5,16 @@ in-memory H2 database.
 
 ![Customer list screenshot](docs/images/customer-list.jpg)
 
+## Screenshots
+
+| Customer list | Create customer |
+|---|---|
+| ![Customer list](docs/images/customer-list.jpg) | ![Create customer dialog](docs/images/create-customer-dialog.jpg) |
+
+| Edit customer | Delete confirmation |
+|---|---|
+| ![Edit customer dialog](docs/images/edit-customer-dialog.jpg) | ![Delete confirmation dialog](docs/images/delete-confirm-dialog.jpg) |
+
 ## Tech Stack
 
 - Java 25
@@ -19,9 +29,11 @@ in-memory H2 database.
 ## Features
 
 - List, create, update, and delete customers
-- PrimeFaces data table with an edit/create dialog
-- Auto-created schema on startup (`Hibernate ddl-auto: update`)
+- PrimeFaces data table with pagination, series tags, and an edit/create dialog
+- Delete guarded by a confirmation dialog
+- Auto-created schema on startup (`Hibernate ddl-auto: update`), seeded with 50 sample customers
 - H2 web console for inspecting the database
+- Custom SVG favicon
 
 ## Prerequisites
 
