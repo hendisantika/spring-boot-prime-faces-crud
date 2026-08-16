@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,6 +30,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomerBean {
 
+    private static final List<String> SERIES_OPTIONS = List.of(
+            "Naruto", "Jujutsu Kaisen", "Demon Slayer", "One Piece", "Doraemon");
+
+    private static final Map<String, String> SERIES_SEVERITIES = Map.of(
+            "Naruto", "warning",
+            "Jujutsu Kaisen", "danger",
+            "Demon Slayer", "success",
+            "One Piece", "info",
+            "Doraemon", "contrast");
+
     private final CustomerService customerService;
 
     private List<Customer> customers;
@@ -40,6 +51,14 @@ public class CustomerBean {
     @PostConstruct
     public void init() {
         customers = customerService.findAll();
+    }
+
+    public List<String> getSeriesOptions() {
+        return SERIES_OPTIONS;
+    }
+
+    public String seriesSeverity(String series) {
+        return SERIES_SEVERITIES.getOrDefault(series, "secondary");
     }
 
     public void openNew() {
@@ -60,9 +79,14 @@ public class CustomerBean {
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer saved", null));
     }
 
-    public void deleteCustomer(Customer customer) {
-        customerService.delete(customer.getId());
+    public void prepareDelete(Customer customer) {
+        selectedCustomer = customer;
+    }
+
+    public void deleteConfirmed() {
+        customerService.delete(selectedCustomer.getId());
         customers = customerService.findAll();
+        selectedCustomer = null;
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer deleted", null));
     }
